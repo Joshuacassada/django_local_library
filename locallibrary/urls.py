@@ -19,9 +19,12 @@ from django.urls import path, include
 from django.views.generic import RedirectView  
 from django.conf import settings  
 from django.conf.urls.static import static  
+from .api import api
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  
+    path('admin/', admin.site.urls),
+    path("api/", api.urls),  
     path('catalog/', include('catalog.urls')),  
-    path('', RedirectView.as_view(url='catalog/', permanent=True)),  
+    path('', RedirectView.as_view(url='catalog/', permanent=True)),
+    path('accounts/', include('django.contrib.auth.urls')),  
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
